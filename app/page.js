@@ -1,7 +1,6 @@
-import Banner from "./Banner";
-import Header from "./Header";
-import ProductFeed from "./ProductFeed";
-import products from "@/products";
+import Banner from "./components/Banner";
+import Header from "./components/Header";
+import ProductFeed from "./components/ProductFeed";
 
 export default function Home() {
   return (
@@ -9,10 +8,11 @@ export default function Home() {
       {/* Header */}
       <Header />
 
-      <div className="max-w-screen-xl mx-auto">
+      <div>
         {/* Banner */}
         <Banner />
 
+        {/* ProductFeed */}
         <ProductFeed />
       </div>
     </main>

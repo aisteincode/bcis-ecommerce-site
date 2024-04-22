@@ -2,18 +2,21 @@
 import products from "@/products";
 import Image from "next/image";
 import { useState } from "react";
-import { StarIcon } from "@heroicons/react/24/solid";
-
-const MAX_RATING = 5;
-const MIN_RATING = 1;
+import { useDispatch } from "react-redux";
+import { addToBasket } from "@/lib/slices/basketSlice";
 
 function ProductFeed() {
-  const [rating] = useState(
-    Math.floor(Math.random() * (MAX_RATING - MIN_RATING + 1)) + MIN_RATING
-  );
+  const dispatch = useDispatch();
+
+  const addItemToBasket = () => {
+    const product = products.map(product);
+
+    // Sending the product as an actino to the redux store... (basket)
+    dispatch(addToBasket(product));
+  };
 
   return (
-    <div className="grid grid-flow-row-dense md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    <div className="max-w-screen-xl mx-auto grid grid-flow-row-dense md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {products.map(({ id, title, price, description, category, image }) => (
         // Each individual product component here...
         <div
@@ -34,21 +37,16 @@ function ProductFeed() {
 
           <h4 className="my-3">{title}</h4>
 
-          <div className="flex">
-            {Array(rating)
-              .fill()
-              .map((_, i) => (
-                <StarIcon key={id} className="h-5 text-yellow-500" />
-              ))}
-          </div>
-
           <p className="text-xs my-2 line-clamp-2">{description}</p>
 
           <div className="mb-5">
             <p>{price}</p>
           </div>
 
-          <button className="py-2 mt-auto border-2 font-medium border-gray-800 bg-transparent text-gray-800 active:bg-gray-200/20 focus:outline-none">
+          <button
+            onClick={addItemToBasket}
+            className="py-2 mt-auto border-2 font-medium border-gray-800 bg-transparent text-gray-800 active:bg-gray-200/20 focus:outline-none"
+          >
             Add to Basket
           </button>
         </div>

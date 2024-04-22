@@ -1,4 +1,6 @@
+import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
+import Providers from "@/lib/Providers";
 
 export const metadata = {
   title: "Bcis Ecommerce Website",
@@ -7,9 +9,12 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      {/* header */}
-      <body>{children}</body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body>
+          <Providers>{children}</Providers>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
